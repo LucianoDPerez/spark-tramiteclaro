@@ -80,7 +80,7 @@ Esto es una ayuda explicativa, no reemplaza al profesional. Si es urgente, busc√
 ```
 
 ## How to reproduce
-Code repository or runnable example, if available: local repo `spark-tramiteclaro` (src/config.py, src/domain.py, src/usecase.py, src/llm_client.py, src/cache.py, src/ratelimit.py, app.py, simplificar.py, test_usecase.py). Publish link to be added.
+Code repository or runnable example, if available: https://github.com/LucianoDPerez/spark-tramiteclaro (`src/config.py`, `src/domain.py`, `src/usecase.py`, `src/llm_client.py`, `src/cache.py`, `src/ratelimit.py`, `app.py`, `simplificar.py`, `test_usecase.py`).
 Setup and run instructions:
 1. Run llama-server: `llama-server -m /Users/luchop/.cache/huggingface/hub/models--XHToken--Spark-X2.6-4B-GGUF/snapshots/fe31f8d64890302cc3a1d365d700357b4b75ba77/Spark-X2.6-4B-Q4_K_M.gguf -c 16384 -ngl 99 --flash-attn on --threads 10 --threads-batch 10 --batch-size 1024 --ubatch-size 512 --port 8080 --host 0.0.0.0 --alias spark2.6-4B --temp 0.2 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.05 --parallel 1 --jinja --cont-batching`
 2. `pip install -r requirements.txt` (streamlit, requests)
