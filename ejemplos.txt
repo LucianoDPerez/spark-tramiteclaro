@@ -1,0 +1,8 @@
+EJEMPLO 1 - Turno médico:
+"Deberá presentarse con 30 minutos de antelación al horario asignado, con DNI original, credencial de obra social y orden médica autorizada. En caso de estudios con contraste deberá concurrir con 8 hs de ayuno. La tolerancia máxima es de 10 minutos."
+
+EJEMPLO 2 - Farmacia:
+"Tomar 1 comprimido de 50mg cada 12 horas con las comidas durante 7 días. No interrumpir el tratamiento aunque mejoren los síntomas. Conservar en lugar fresco y seco. Ante mareos o sarpullido consultar al médico."
+
+EJEMPLO 3 - Defensa civil (inundación):
+"Ante alerta amarilla por tormentas, evite circular por calles anegadas, desconecte artefactos eléctricos en planta baja y prepare documentación en bolsa estanca. En caso de evacuación siga las indicaciones del personal."
