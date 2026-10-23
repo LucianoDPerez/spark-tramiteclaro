@@ -14,8 +14,8 @@ Model source and revision: `XHToken Spark-X2.6-4B-GGUF`, file `Spark-X2.6-4B-Q4_
 The model's role in the application: sole generator. It rewrites the input into the 3 fixed sections + safety line. No other LLM is used. App logic only validates, caches, and rate-limits.
 Other models, tools, or services used, if any: none for inference. App stack: Python + Streamlit UI + `requests` to local llama-server. No cloud calls.
 
-## Demo (illustrated walkthrough - no video yet, screenshots from Streamlit to add)
-Video link / embedded screenshots: Streamlit `app.py` screenshots to be attached (UI: input box -> Explicar en simple -> 3 sections). Below are 3 real end-to-end runs via `simplificar.py` on local server.
+## Demo (illustrated walkthrough with Streamlit screenshots below)
+Video link / embedded screenshots: 4 Streamlit screenshots attached below (empty -> filled -> running -> output). UI flow: input box -> Explicar en simple -> 3 sections. Below are 3 real end-to-end runs via `simplificar.py` on local server.
 
 Example input 1 (medical appointment, ES real):
 Deberá presentarse con 30 minutos de antelación al horario asignado, con DNI original, credencial de obra social y orden médica autorizada. En caso de estudios con contraste deberá concurrir con 8 hs de ayuno. La tolerancia máxima es de 10 minutos.
