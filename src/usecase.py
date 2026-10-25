@@ -6,6 +6,7 @@ from .domain import SimplifyRequest, SimplifyResult
 from .llm_client import LLMPort, LlamaServerClient
 from .cache import InMemoryCache
 from .ratelimit import RateLimiter, RateLimitedError
+from .validator import validate_output
 
 
 class ValidationError(ValueError):
@@ -49,5 +50,10 @@ class SimplifyTextUseCase:
         ms = int((time.monotonic() - t0) * 1000)
         if not output:
             raise ValidationError("Empty model output, retry")
+        try:
+            validate_output(output)
+        except ValueError as e:
+            # Fail closed: never cache unstructured output (prompt-injection safe).
+            raise ValidationError(f"Invalid model output: {e}") from e
         self._cache.set(req.cache_key, output)
         return SimplifyResult(output=output, cached=False, model=SETTINGS.model, latency_ms=ms)
