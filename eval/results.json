@@ -1,0 +1,105 @@
+[
+  {
+    "id": "es-turno",
+    "language": "es",
+    "facts_total": 6,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 56917,
+    "missing_facts": [],
+    "error": null,
+    "output": "**VERSIÓN SIMPLE:**\n\nTienes que llegar 30 minutos antes del horario que te haya asignado. Lleva tu DNI original, tu credencial de la obra social y tu orden médica. Si estás haciendo estudios con contraste, debes llegar 8 horas antes de comer. La tolerancia máxima es de 10 minutos.\n\n**PASOS A SEGUIR:**\n\n1. Llega 30 minutos antes del horario asignado.\n2. Lleva el DNI original, la credencial de la obra social y la orden médica.\n3. Si haces estudios con contraste, llega 8 horas antes de comer.\n4. La tolerancia máxima es de 10 minutos.\n\n**QUÉ LLEVAR / QUÉ PREGUNTAR:**\n\n- Lleva: DNI original, credencial de la obra social y orden médica.\n- Si haces estudios con contraste, asegúrate de llegar 8 horas antes de comer.\n\nEsto es una ayuda explicativa, no reemplaza al profesional. Si es urgente, buscá atención humana."
+  },
+  {
+    "id": "es-farmacia",
+    "language": "es",
+    "facts_total": 6,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 63283,
+    "missing_facts": [],
+    "error": null,
+    "output": "VERSIÓN SIMPLE:\nTomar 1 comprimido de 50mg cada 12 horas con las comidas durante 7 días.\nNo interrumpir el tratamiento aunque mejoren los síntomas.\nGuardar en un lugar fresco y seco.\nSi se tiene mareos o sarpullido, consultar al médico.\n\nPASOS A SEGUIR:\n1. Tomar 1 comprimido de 50mg cada 12 horas con las comidas durante 7 días.\n2. No interrumpir el tratamiento aunque mejoren los síntomas.\n3. Guardar el medicamento en un lugar fresco y seco.\n4. Si se tiene mareos o sarpullido, consultar al médico.\n\nQUÉ LLEVAR / QUÉ PREGUNTAR:\nLlevar el medicamento guardado en un lugar fresco y seco.\nPreguntar al médico si se tiene mareos o sarpullido.\n\nEsto es una ayuda explicativa, no reemplaza al profesional. Si es urgente, buscá atención humana."
+  },
+  {
+    "id": "es-alerta",
+    "language": "es",
+    "facts_total": 4,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 76015,
+    "missing_facts": [
+      "alerta amarilla",
+      "artefactos electricos",
+      "bolsa estanca"
+    ],
+    "error": null,
+    "output": "**VERSIÓN SIMPLE:**\n\nSi hay tormentas, no circules por calles anegadas. Desconecta los aparatos eléctricos que están en la planta baja. Guarda tu documentación en una bolsa cerrada. Si te piden evacuar, sigue las instrucciones del personal.\n\n**PASOS A SEGUIR:**\n1. No uses carreteras o calles que estén inundadas.\n2. Cierra los aparatos eléctricos que están en la planta baja.\n3. Guarda tu documentación en una bolsa cerrada.\n4. Si te piden que te evacues, sigue las indicaciones del personal.\n\n**QUÉ LLEVAR / QUÉ PREGUNTAR:**\n- Lleva una bolsa cerrada para guardar tu documentación.\n- Pregúntate si hay calles anegadas que no puedes usar.\n- Pregúntate si los aparatos eléctricos deben desconectarse.\n- Pregúntate si te piden evacuar y cómo hacerlo.\n\nEsto es una ayuda explicativa, no reemplaza al profesional. Si es urgente, buscá atención humana."
+  },
+  {
+    "id": "en-clinic",
+    "language": "en",
+    "facts_total": 6,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 45208,
+    "missing_facts": [],
+    "error": null,
+    "output": "SIMPLE VERSION:\nYou need to arrive 30 minutes early for your appointment. Bring your original ID and insurance card. You must fast for 8 hours before contrast studies. Arriving more than 10 minutes late will not be accepted.\n\nSTEPS TO FOLLOW:\n1. Plan to arrive 30 minutes before your appointment.\n2. Bring your original ID and insurance card.\n3. Fast for 8 hours before contrast studies.\n4. Arrive no more than 10 minutes late; arriving beyond 10 minutes late will not be accepted.\n\nWHAT TO BRING / WHAT TO ASK:\nBring: original ID, insurance card.\nAsk: No specific questions are stated in this text.\n\nThis is an explanatory aid, it does not replace a professional. If it is urgent, seek human help."
+  },
+  {
+    "id": "en-medication",
+    "language": "en",
+    "facts_total": 6,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 46635,
+    "missing_facts": [],
+    "error": null,
+    "output": "SIMPLE VERSION:\nTake 1 tablet of 50mg every 12 hours with meals for 7 days. Do not stop the treatment even if symptoms improve. Store the tablets in a cool, dry place. Consult a doctor if dizziness or rash appears.\n\nSTEPS TO FOLLOW:\n1. Take 1 tablet of 50mg every 12 hours with meals for 7 days.\n2. Do not stop the treatment even if symptoms improve.\n3. Store the tablets in a cool, dry place.\n4. If dizziness or rash appears, consult a doctor.\n\nWHAT TO BRING / WHAT TO ASK:\nBring the tablets with you when you take them.\nAsk a doctor if you have dizziness or rash.\n\nThis is an explanatory aid, it does not replace a professional. If it is urgent, seek human help."
+  },
+  {
+    "id": "en-benefits",
+    "language": "en",
+    "facts_total": 4,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 44944,
+    "missing_facts": [],
+    "error": null,
+    "output": "SIMPLE VERSION:\nIf you do not return the renewal form and do not take the phone interview, your benefits will stop without further notice. The deadline is 45 days from this letter. You can call 555-0142 to reschedule.\n\nSTEPS TO FOLLOW:\n1. Return the renewal form.\n2. Take the phone interview.\n3. If you miss both, your benefits will stop without further notice.\n4. If you need to reschedule, call 555-0142.\n\nWHAT TO BRING / WHAT TO ASK:\nBring the renewal form.\nAsk about the phone interview if you are unsure how to take it.\nAsk for help rescheduling if you miss the deadline.\n\nThis is an explanatory aid, it does not replace a professional. If it is urgent, seek human help."
+  },
+  {
+    "id": "zh-预约",
+    "language": "zh",
+    "facts_total": 6,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 28895,
+    "missing_facts": [],
+    "error": null,
+    "output": "**简明版本：**\n请提前30分钟到达预约时间。需带身份证原件、医保卡和已授权的医生处方。增强检查前要空腹8小时。迟到超过10分钟不予受理。\n\n**办理步骤：**\n1. 提前30分钟到达预约时间。\n2. 携带身份证原件、医保卡、已授权的医生处方。\n3. 进行增强检查前空腹8小时。\n\n**需要携带 / 需要询问：**\n需要携带：身份证原件、医保卡、已授权的医生处方。\n\n这是解释性帮助，不能替代专业人员。如有紧急情况，请寻求人工帮助。"
+  },
+  {
+    "id": "zh-用药",
+    "language": "zh",
+    "facts_total": 6,
+    "status": "rejected",
+    "cached": false,
+    "latency_ms": 0,
+    "missing_facts": [],
+    "error": "Invalid model output: Dropped numbers from input: 50",
+    "output": ""
+  },
+  {
+    "id": "zh-通知",
+    "language": "zh",
+    "facts_total": 4,
+    "status": "ok",
+    "cached": false,
+    "latency_ms": 27170,
+    "missing_facts": [],
+    "error": null,
+    "output": "**简明版本：**\n社区手作课有15个名额，材料费暂定100元，最终费用以开课公告为准。目前不接受报名，也不收取订金。\n\n**办理步骤：**\n目前不接受报名，也没有订金收取安排。最终费用以开课公告为准。\n\n**需要携带 / 需要询问：**\n目前无需携带材料。需询问开课公告，确认最终费用。\n\n这是解释性帮助，不能替代专业人员。如有紧急情况，请寻求人工帮助。"
+  }
+]

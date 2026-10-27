@@ -3,6 +3,8 @@ from __future__ import annotations
 import hashlib
 from dataclasses import dataclass
 
+from .languages import DEFAULT_LANGUAGE
+
 
 def normalize(text: str) -> str:
     """Collapse whitespace for deduplication (same intent -> same key)."""
@@ -13,6 +15,7 @@ def normalize(text: str) -> str:
 class SimplifyRequest:
     text: str
     temperature: float = 0.2
+    language: str = DEFAULT_LANGUAGE
 
     @property
     def normalized(self) -> str:
@@ -20,7 +23,7 @@ class SimplifyRequest:
 
     @property
     def cache_key(self) -> str:
-        raw = f"{self.normalized}|temp={self.temperature}"
+        raw = f"{self.normalized}|temp={self.temperature}|lang={self.language}"
         return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:32]
 
 
@@ -30,3 +33,4 @@ class SimplifyResult:
     cached: bool
     model: str
     latency_ms: int
+    language: str = DEFAULT_LANGUAGE

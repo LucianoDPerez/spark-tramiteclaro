@@ -8,12 +8,16 @@ Tracks: Accessibility + Health and well-being.
 Paste a confusing official text (appointment, prescription, civil-defense alert) and get back:
 **VERSIÓN SIMPLE + PASOS A SEGUIR + QUÉ LLEVAR / QUÉ PREGUNTAR** — plus a safety footer. It explains, never diagnoses.
 
+Works in **Spanish, English and Chinese** (auto-detected from your OS, switchable). You can also **paste a photo** of the paper (local OCR) and **listen to the result** read aloud by an offline system voice.
+
 ![empty](docs/shot-01-empty.png)
 ![output](docs/shot-04-output.png)
 
 ## Why this matters
 
 Official texts are long and jargon-heavy. That causes missed appointments, medication errors, and unsafe behavior in emergencies. Vulnerable users will not paste sensitive documents into cloud chatbots. This runs offline on a 4B model, so privacy is architectural, not promised.
+
+For older adults and low-literacy users, plain text is still text. That is why the output can be **spoken aloud** with an offline voice: reading is the barrier, not just the vocabulary.
 
 ## Quickstart
 
@@ -37,32 +41,53 @@ Model: `XHToken Spark-X2.6-4B-GGUF`, file `Spark-X2.6-4B-Q4_K_M.gguf`, revision 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python -m streamlit run app.py
-# or CLI: .venv/bin/python simplificar.py ejemplos.txt
+# or CLI: .venv/bin/python simplificar.py ejemplos.txt es
 ```
+
+UI runs on stock Streamlit (Deploy menu, theme toggle) so local use keeps every control.
+
+If you edit anything under `src/`, restart Streamlit: module-level caches keep the old code until the server restarts. `app.py` alone hot-reloads.
 
 **3. Test without model:**
 
 ```bash
-python3 -m unittest -v
+python3 -m unittest -v          # 24 tests, no model needed
+python3 -m eval.run_eval        # fact-retention table, needs the model
 ```
 
 ## How it works
 
 ```
 UI (app.py / simplificar.py)
-  -> SimplifyTextUseCase (validate -> dedupe -> cache -> rate-limit -> LLM)
+  -> OCR adapter (optional: photo -> text, local tesseract)
+  -> SimplifyTextUseCase (validate -> dedupe -> cache -> rate-limit -> LLM -> validate)
     -> LlamaServerClient (fixed local URL, timeout, enable_thinking=False)
+  -> TTS adapter (optional: text -> WAV, offline `say`)
 ```
 
-- `src/domain.py` — entities, normalization, SHA cache key (deduplication).
-- `src/usecase.py` — single entry point, idempotent (same input = cached output), validation, rate-limit.
+- `src/domain.py` — entities, normalization, SHA cache key (deduplication, language-aware).
+- `src/usecase.py` — single entry point, idempotent, fail-closed validation, rate-limit.
+- `src/languages.py` — one profile per language: headers, footer, system prompt, TTS voice, OCR language, negation markers, UI copy.
+- `src/validator.py` — three fail-closed gates: 3-section structure + footer, **number preservation**, **negation preservation**.
 - `src/llm_client.py` — thin adapter over `http://localhost:8080/v1`. No dynamic URLs (SSRF-safe).
 - `src/cache.py` — TTL in-memory cache. Thread-safe.
 - `src/ratelimit.py` — protects the single-slot server from flooding.
-- `src/prompts.py` — Spanish system prompt, 3 fixed sections + safety footer, no diagnosis.
+- `src/ocr.py` — offline tesseract adapter with bundled `spa`/`eng`/`chi_sim` data in `models/tessdata/`.
+- `src/tts.py` — offline macOS `say` adapter (Paulina / Samantha / Tingting).
+- `src/locale_detect.py` — best-effort OS language detection for the default UI language.
 - `src/config.py` — single source of truth (no magic numbers scattered).
 
-Principles: Clean Architecture (domain isolated), SOLID (DIP via `LLMPort`), KISS (stdlib + 2 deps), DRY (one config, one prompt), OWASP (input caps 20–4000 chars, timeouts, no PII logging, fail-closed errors).
+### Fail-closed gates
+
+| Gate | Catches | Behaviour |
+| --- | --- | --- |
+| Structure | missing/reordered sections, missing safety footer | reject, never cache |
+| Numbers | dropped dose, deadline or quantity (`50mg`, `180 days`) | reject, never cache |
+| Negation | inverted prohibition (`no interrumpir` -> `interrumpir`) | reject, never cache |
+
+The negation gate excludes the fixed safety footer from counting, because the footer itself contains a negation ("no reemplaza") and would otherwise mask a dropped one.
+
+Principles: Clean Architecture (domain isolated), SOLID (DIP via `LLMPort`, `TTSPort`, `OCRPort`), KISS (stdlib + 3 deps), DRY (one profile registry), OWASP (input caps 20–4000 chars, timeouts, no PII logging, fail-closed errors).
 
 ## Reproducibility
 

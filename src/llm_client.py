@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Protocol
 import requests
 from .config import SETTINGS
-from .prompts import SYSTEM_PROMPT
 
 
 class LLMError(RuntimeError):
@@ -11,7 +10,7 @@ class LLMError(RuntimeError):
 
 
 class LLMPort(Protocol):
-    def complete(self, text: str, temperature: float) -> str:
+    def complete(self, user_message: str, temperature: float, system_prompt: str) -> str:
         ...
 
 
@@ -22,12 +21,12 @@ class LlamaServerClient:
         self._url = base_url.rstrip("/") + "/chat/completions"
         self._model = model
 
-    def complete(self, text: str, temperature: float) -> str:
+    def complete(self, user_message: str, temperature: float, system_prompt: str) -> str:
         payload = {
             "model": self._model,
             "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"Explicá este texto:\n\n{text}"},
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message},
             ],
             "temperature": temperature,
             "top_p": 0.95,
