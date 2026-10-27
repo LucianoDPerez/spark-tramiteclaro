@@ -1,6 +1,8 @@
 """Output validator: fail-closed structure check (Clean Architecture, no I/O)."""
 from __future__ import annotations
 
+import re
+
 REQUIRED_HEADERS = (
     "VERSIÓN SIMPLE:",
     "PASOS A SEGUIR:",
@@ -29,3 +31,16 @@ def validate_output(output: str) -> None:
     positions = [text.index(h) for h in REQUIRED_HEADERS] + [text.index(SAFETY_FOOTER)]
     if positions != sorted(positions):
         raise ValueError("Sections out of order")
+
+
+def validate_numbers_preserved(input_text: str, output_text: str) -> None:
+    """Every digit group in the input must survive in the output.
+
+    Catches dropped doses, deadlines and quantities ("50mg" -> "50 mg" is
+    fine, digits are compared; a missing "180" or "7" fails closed).
+    """
+    in_nums = set(re.findall(r"\d+", input_text))
+    out_nums = set(re.findall(r"\d+", output_text))
+    missing = sorted(in_nums - out_nums, key=int)
+    if missing:
+        raise ValueError(f"Dropped numbers from input: {', '.join(missing)}")

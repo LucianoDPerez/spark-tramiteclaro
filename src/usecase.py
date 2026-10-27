@@ -6,7 +6,7 @@ from .domain import SimplifyRequest, SimplifyResult
 from .llm_client import LLMPort, LlamaServerClient
 from .cache import InMemoryCache
 from .ratelimit import RateLimiter, RateLimitedError
-from .validator import validate_output
+from .validator import validate_numbers_preserved, validate_output
 
 
 class ValidationError(ValueError):
@@ -52,6 +52,7 @@ class SimplifyTextUseCase:
             raise ValidationError("Empty model output, retry")
         try:
             validate_output(output)
+            validate_numbers_preserved(text, output)
         except ValueError as e:
             # Fail closed: never cache unstructured output (prompt-injection safe).
             raise ValidationError(f"Invalid model output: {e}") from e

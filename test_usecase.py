@@ -67,6 +67,31 @@ class UseCaseTest(unittest.TestCase):
         # Fail closed: invalid output must never be cached, so LLM is hit twice.
         self.assertEqual(fake.calls, 2)
 
+    def test_numbers_preserved_passes(self):
+        good = (
+            "VERSIÓN SIMPLE:\nTomar 1 comprimido de 50mg cada 12 horas durante 7 días.\n"
+            "PASOS A SEGUIR:\n1. Tomar el comprimido con la comida.\n"
+            "QUÉ LLEVAR / QUÉ PREGUNTAR:\n- Llevar la receta del médico.\n"
+            "Esto es una ayuda explicativa, no reemplaza al profesional. "
+            "Si es urgente, buscá atención humana."
+        )
+        uc = SimplifyTextUseCase(llm=FakeLLM(output=good), cache=InMemoryCache(), limiter=RateLimiter(0))
+        r = uc.execute(SimplifyRequest(
+            text="Tomar 1 comprimido de 50mg cada 12 horas durante 7 días según receta médica oficial."))
+        self.assertFalse(r.cached)
+
+    def test_numbers_dropped_rejected_and_not_cached(self):
+        # GOOD keeps "1" but drops 50/12/7 -> fail closed, no cache.
+        fake = FakeLLM(output=FakeLLM.GOOD)
+        uc = SimplifyTextUseCase(llm=fake, cache=InMemoryCache(), limiter=RateLimiter(0))
+        req = SimplifyRequest(
+            text="Tomar 1 comprimido de 50mg cada 12 horas durante 7 días según receta médica oficial.")
+        with self.assertRaises(ValidationError):
+            uc.execute(req)
+        with self.assertRaises(ValidationError):
+            uc.execute(req)
+        self.assertEqual(fake.calls, 2)
+
 
 if __name__ == "__main__":
     unittest.main()
